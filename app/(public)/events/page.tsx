@@ -90,7 +90,7 @@ export default async function EventsPage() {
                   <h3 className="mb-4 text-2xl font-black">{month}</h3>
                   <div className="grid gap-4">
                     {monthEvents.map((event, index) => (
-                      <article key={event.id} className="soft-card stagger-soft p-5 sm:p-6" style={{ "--i": index } as CSSProperties}>
+                      <article key={event.id} id={event.id} className="soft-card stagger-soft scroll-mt-28 p-5 sm:p-6" style={{ "--i": index } as CSSProperties}>
                         <div className="grid gap-5 sm:grid-cols-[96px_1fr]">
                           <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-blue-800 text-center text-lg font-black text-white">
                             {event.date}

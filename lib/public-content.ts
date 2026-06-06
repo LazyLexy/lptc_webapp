@@ -9,6 +9,8 @@ export type DepartmentSummary = {
   icon: string;
   logoPath: string;
   color: string;
+  programLevels: string[];
+  careerPaths: string;
   teacherCount: number;
   studentCount: number;
 };
@@ -128,6 +130,7 @@ type DepartmentCatalogItem = {
   logoPath: string;
   color: string;
   courseSlugs: string[];
+  careerPaths: string;
   heroImage: string;
   teacherCount: number;
   studentCount: number;
@@ -171,6 +174,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     logoPath: "/logo/a-lptc.png",
     color: "#D97706",
     courseSlugs: ["vocational-certificate", "vocational-diploma", "bachelor-technology"],
+    careerPaths: "งานซ่อมบำรุง, งานบริการยานยนต์, งานศูนย์ซ่อม",
     heroImage: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 6,
     studentCount: 410,
@@ -188,6 +192,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     logoPath: "/logo/ev-lptc.png",
     color: "#0891B2",
     courseSlugs: ["vocational-diploma"],
+    careerPaths: "งานบริการ EV, งานระบบแบตเตอรี่, งานวิเคราะห์ระบบควบคุม",
     heroImage: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 4,
     studentCount: 180,
@@ -205,6 +210,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     logoPath: "/logo/m-lptc.png",
     color: "#475569",
     courseSlugs: ["vocational-certificate", "vocational-diploma"],
+    careerPaths: "งานเครื่องมือกล, งานผลิตชิ้นส่วน, งานควบคุมคุณภาพ",
     heroImage: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 5,
     studentCount: 330,
@@ -222,6 +228,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     logoPath: "/logo/w-lptc.png",
     color: "#DC2626",
     courseSlugs: ["vocational-certificate", "vocational-diploma"],
+    careerPaths: "งานเชื่อมโครงสร้าง, งานโลหะแผ่น, งานซ่อมบำรุงโลหะ",
     heroImage: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 4,
     studentCount: 260,
@@ -239,6 +246,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     logoPath: "/logo/e-lptc.png",
     color: "#CA8A04",
     courseSlugs: ["vocational-certificate", "vocational-diploma", "bachelor-technology"],
+    careerPaths: "งานระบบไฟฟ้า, งานควบคุมมอเตอร์, งานพลังงานทดแทน",
     heroImage: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 5,
     studentCount: 360,
@@ -256,6 +264,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     logoPath: "/logo/e-lptc.png",
     color: "#7C3AED",
     courseSlugs: ["vocational-certificate", "vocational-diploma"],
+    careerPaths: "งานซ่อมอิเล็กทรอนิกส์, งานระบบควบคุม, งานหุ่นยนต์",
     heroImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 5,
     studentCount: 280,
@@ -273,6 +282,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     logoPath: "/logo/b-lptc.png",
     color: "#92400E",
     courseSlugs: ["vocational-certificate", "vocational-diploma"],
+    careerPaths: "งานก่อสร้าง, งานประมาณราคา, งานควบคุมหน้างาน",
     heroImage: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 4,
     studentCount: 230,
@@ -290,6 +300,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     logoPath: "/logo/cv-lptc.png",
     color: "#0F766E",
     courseSlugs: ["vocational-certificate", "vocational-diploma"],
+    careerPaths: "งานสำรวจ, งานโครงสร้าง, งานควบคุมงานโยธา",
     heroImage: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 4,
     studentCount: 220,
@@ -307,6 +318,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     logoPath: "/logo/arc-lptc.png",
     color: "#1E3A5F",
     courseSlugs: ["vocational-certificate", "vocational-diploma"],
+    careerPaths: "งานเขียนแบบ, งานออกแบบอาคาร, งานนำเสนอแบบจำลอง",
     heroImage: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 4,
     studentCount: 210,
@@ -324,6 +336,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     logoPath: "/logo/mn-lptc.png",
     color: "#4338CA",
     courseSlugs: ["vocational-diploma", "bachelor-technology"],
+    careerPaths: "งานระบบอัตโนมัติ, งาน PLC, งานหุ่นยนต์อุตสาหกรรม",
     heroImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 5,
     studentCount: 240,
@@ -341,6 +354,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     logoPath: "/logo/it-lptc.png",
     color: "#1D4ED8",
     courseSlugs: ["vocational-certificate", "vocational-diploma", "bachelor-technology"],
+    careerPaths: "งานพัฒนาเว็บ, งานเครือข่าย, งานระบบสารสนเทศ",
     heroImage: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 4,
     studentCount: 320,
@@ -360,6 +374,10 @@ export function getCatalogDepartmentBySlug(slug: string) {
 
 export function getCatalogDepartmentsForCourseLevel(levelSlug: string) {
   return departmentCatalog.filter((department) => department.courseSlugs.includes(levelSlug));
+}
+
+function buildProgramLevels(courseSlugs: string[]) {
+  return courseLevels.filter((course) => courseSlugs.includes(course.slug)).map((course) => course.shortName);
 }
 
 function buildPrograms(department: DepartmentCatalogItem): DepartmentProgram[] {
@@ -384,6 +402,8 @@ function buildFallbackDepartment(department: DepartmentCatalogItem, index: numbe
     icon: department.icon,
     logoPath: department.logoPath,
     color: department.color,
+    programLevels: buildProgramLevels(department.courseSlugs),
+    careerPaths: department.careerPaths,
     teacherCount: department.teacherCount,
     studentCount: department.studentCount,
     programs: buildPrograms(department),
@@ -721,6 +741,7 @@ function toDepartmentSummary(department: {
   _count: { teachers: number; students: number };
 }): DepartmentSummary {
   const fallback = getFallbackDepartment(department.slug);
+  const catalog = getCatalogDepartmentBySlug(department.slug);
   return {
     id: department.id,
     name: fallback?.name ?? department.name,
@@ -730,6 +751,8 @@ function toDepartmentSummary(department: {
     icon: department.icon ?? fallback?.icon ?? "book",
     logoPath: fallback?.logoPath ?? genericDepartmentDetails.logoPath,
     color: department.color ?? fallback?.color ?? "#1D4ED8",
+    programLevels: fallback?.programLevels ?? buildProgramLevels(catalog?.courseSlugs ?? courseLevels.map((course) => course.slug)),
+    careerPaths: fallback?.careerPaths ?? catalog?.careerPaths ?? "เส้นทางอาชีพตามสาขาที่เลือกและการฝึกปฏิบัติจริง",
     teacherCount: department._count.teachers || fallback?.teacherCount || 0,
     studentCount: department._count.students || fallback?.studentCount || 0,
   };
