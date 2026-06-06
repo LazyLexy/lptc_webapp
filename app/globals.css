@@ -1,0 +1,304 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme inline {
+  --color-primary: #1e40af; /* blue-800 - Deep Royal Blue */
+  --color-secondary: #0f172a; /* slate-900 - Dark Navy */
+  --color-accent: #0ea5e9; /* sky-500 - Bright Sky Blue */
+  
+  --font-sans: var(--font-sarabun);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --surface-soft: #f8fafc;
+  --surface-blue: #eff6ff;
+  --ring-soft: rgba(37, 99, 235, 0.22);
+  --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --shadow-lift: 0 18px 42px rgba(15, 23, 42, 0.14);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+main h1,
+main h2,
+main h3 {
+  overflow-wrap: break-word;
+  word-break: normal;
+  text-wrap: balance;
+}
+
+main p,
+main li {
+  overflow-wrap: break-word;
+  word-break: normal;
+  text-wrap: pretty;
+}
+
+main section {
+  overflow-x: hidden;
+}
+
+a,
+button,
+summary,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid var(--ring-soft);
+  outline-offset: 3px;
+}
+
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+select,
+summary {
+  cursor: pointer;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: rgba(14, 165, 233, 0.22);
+}
+
+.soft-surface {
+  background:
+    radial-gradient(circle at 12% 12%, rgba(14, 165, 233, 0.12), transparent 28rem),
+    linear-gradient(180deg, #f8fafc 0%, #ffffff 68%);
+}
+
+.soft-panel {
+  border: 1px solid rgba(203, 213, 225, 0.78);
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--shadow-soft);
+}
+
+.soft-card {
+  will-change: transform;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 1.25rem;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  transition:
+    transform 220ms var(--ease-out-quart),
+    box-shadow 220ms var(--ease-out-quart),
+    border-color 220ms var(--ease-out-quart),
+    background-color 220ms var(--ease-out-quart),
+    color 220ms var(--ease-out-quart);
+}
+
+.soft-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: var(--shadow-lift);
+}
+
+.soft-button {
+  min-height: 2.75rem;
+  border-radius: 999px;
+  transition:
+    transform 160ms var(--ease-out-quart),
+    box-shadow 160ms var(--ease-out-quart),
+    background-color 160ms var(--ease-out-quart),
+    color 160ms var(--ease-out-quart);
+}
+
+.soft-button:hover {
+  transform: translateY(-1px);
+}
+
+.soft-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.soft-button:focus-visible,
+.soft-card:focus-visible,
+.soft-panel:focus-within {
+  box-shadow:
+    0 0 0 4px var(--ring-soft),
+    var(--shadow-soft);
+}
+
+.soft-focus {
+  outline: none;
+}
+
+.soft-focus:focus-visible {
+  box-shadow: 0 0 0 4px var(--ring-soft);
+}
+
+.soft-menu {
+  animation: menu-in 210ms var(--ease-out-quint) both;
+  transform-origin: top center;
+}
+
+.reveal-soft {
+  animation: reveal-soft 620ms var(--ease-out-quint) both;
+}
+
+.reveal-soft[data-delay="1"] {
+  animation-delay: 80ms;
+}
+
+.reveal-soft[data-delay="2"] {
+  animation-delay: 160ms;
+}
+
+.stagger-soft {
+  animation: reveal-soft 520ms var(--ease-out-quint) both;
+  animation-delay: calc(var(--i, 0) * 54ms);
+}
+
+/* Custom Animations (Aceternity/MagicUI Style) */
+@keyframes subtle-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+@keyframes reveal-soft {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-subtle-zoom {
+  animation: subtle-zoom 20s infinite alternate ease-in-out;
+}
+
+.glass-card {
+  @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl;
+}
+
+.rich-content {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.rich-content h2 {
+  margin-top: 1.5rem;
+  font-size: 1.5rem;
+  line-height: 2.1rem;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.rich-content h3 {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  line-height: 1.9rem;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.rich-content ul,
+.rich-content ol {
+  padding-left: 1.5rem;
+}
+
+.rich-content ul {
+  list-style: disc;
+}
+
+.rich-content ol {
+  list-style: decimal;
+}
+
+.rich-content a {
+  font-weight: 800;
+  color: #1e40af;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.rich-content blockquote {
+  border-left: 4px solid #1e40af;
+  border-radius: 1rem;
+  background: #eff6ff;
+  padding: 1rem 1.25rem;
+  color: #1e3a8a;
+}
+
+.rich-content img {
+  width: 100%;
+  border-radius: 1.5rem;
+}
+
+.stable-scrollbar {
+  scrollbar-gutter: stable both-edges;
+}
+
+.dark .glass-card {
+  @apply bg-slate-900/70 border-slate-800;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .soft-card:hover,
+  .soft-button:hover {
+    transform: none;
+  }
+
+  .reveal-soft,
+  .stagger-soft,
+  .soft-menu {
+    animation: none !important;
+  }
+}
