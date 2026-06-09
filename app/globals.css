@@ -302,3 +302,47 @@ html {
     animation: none !important;
   }
 }
+
+@page {
+  size: A4;
+  margin: 8mm 10mm;
+}
+
+@media print {
+  html,
+  body {
+    background: #ffffff !important;
+  }
+
+  .print-hidden {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  .print-page {
+    width: 210mm;
+    min-height: 297mm;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .print-form-page {
+    width: 190mm !important;
+    min-height: 281mm !important;
+    padding: 0 !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .print-section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

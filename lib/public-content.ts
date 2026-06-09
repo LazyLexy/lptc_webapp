@@ -11,32 +11,104 @@ export type DepartmentSummary = {
   color: string;
   programLevels: string[];
   careerPaths: string;
+  category: DepartmentCategory;
   teacherCount: number;
   studentCount: number;
 };
 
+export type DepartmentLevel = "ปวช." | "ปวส." | "ป.ตรี";
+export type DepartmentCategory = "อุตสาหกรรม" | "พาณิชยกรรม" | "บริการ";
+export type DocumentLevel = "ทั่วไป" | DepartmentLevel;
+export type DocumentVisibility = "main" | "microsite" | "both";
+export type DepartmentDocumentCategory =
+  | "หลักสูตร"
+  | "แผนการเรียน"
+  | "รายวิชา"
+  | "สมัครเรียน"
+  | "แบบฟอร์ม"
+  | "ตารางเรียน"
+  | "กิจกรรม"
+  | "คู่มือ"
+  | "อื่น ๆ";
+
+export type DepartmentDocument = {
+  id: string;
+  title: string;
+  description?: string;
+  category: DepartmentDocumentCategory;
+  level?: DocumentLevel;
+  type: "PDF";
+  fileUrl?: string;
+  visibility: DocumentVisibility;
+  updatedAt?: string;
+};
+
 export type DepartmentProgram = {
+  slug: string;
   level: string;
   name: string;
+  duration?: string;
   description: string;
+  highlights?: string[];
+  pdfUrl?: string;
+  studyPlanPdfUrl?: string;
+  courseListPdfUrl?: string;
+  pdfDocumentId?: string;
+  studyPlanDocumentId?: string;
   href: string;
 };
 
 export type DepartmentContact = {
-  phone: string;
-  email: string;
-  room: string;
+  phone?: string;
+  email?: string;
+  room?: string;
+  location?: string;
+  facebookUrl?: string;
+  websiteUrl?: string;
+};
+
+export type Career = {
+  title: string;
+  description?: string;
+};
+
+export type Facility = {
+  title: string;
+  description?: string;
+  image?: string;
+};
+
+export type StaffMember = {
+  id: string;
+  name: string;
+  role: string;
+  email?: string;
+  phone?: string;
+  image?: string;
+};
+
+export type FAQ = {
+  question: string;
+  answer: string;
 };
 
 export type DepartmentDetail = DepartmentSummary & {
   headline: string;
   websiteLabel: string;
+  websiteUrl: string;
+  admissionUrl: string;
+  category: DepartmentCategory;
   heroImage: string;
+  documents: DepartmentDocument[];
   programs: DepartmentProgram[];
+  careers: Career[];
+  facilityCards: Facility[];
   facilities: string[];
   services: string[];
   achievements: string[];
   contact: DepartmentContact;
+  staff: StaffMember[];
+  faqs: FAQ[];
   teachers: {
     id: string;
     name: string;
@@ -131,6 +203,8 @@ type DepartmentCatalogItem = {
   color: string;
   courseSlugs: string[];
   careerPaths: string;
+  category: DepartmentCategory;
+  careers?: Career[];
   heroImage: string;
   teacherCount: number;
   studentCount: number;
@@ -175,6 +249,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     color: "#D97706",
     courseSlugs: ["vocational-certificate", "vocational-diploma", "bachelor-technology"],
     careerPaths: "งานซ่อมบำรุง, งานบริการยานยนต์, งานศูนย์ซ่อม",
+    category: "อุตสาหกรรม",
     heroImage: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 6,
     studentCount: 410,
@@ -193,6 +268,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     color: "#0891B2",
     courseSlugs: ["vocational-diploma"],
     careerPaths: "งานบริการ EV, งานระบบแบตเตอรี่, งานวิเคราะห์ระบบควบคุม",
+    category: "อุตสาหกรรม",
     heroImage: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 4,
     studentCount: 180,
@@ -211,6 +287,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     color: "#475569",
     courseSlugs: ["vocational-certificate", "vocational-diploma"],
     careerPaths: "งานเครื่องมือกล, งานผลิตชิ้นส่วน, งานควบคุมคุณภาพ",
+    category: "อุตสาหกรรม",
     heroImage: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 5,
     studentCount: 330,
@@ -229,6 +306,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     color: "#DC2626",
     courseSlugs: ["vocational-certificate", "vocational-diploma"],
     careerPaths: "งานเชื่อมโครงสร้าง, งานโลหะแผ่น, งานซ่อมบำรุงโลหะ",
+    category: "อุตสาหกรรม",
     heroImage: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 4,
     studentCount: 260,
@@ -247,6 +325,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     color: "#CA8A04",
     courseSlugs: ["vocational-certificate", "vocational-diploma", "bachelor-technology"],
     careerPaths: "งานระบบไฟฟ้า, งานควบคุมมอเตอร์, งานพลังงานทดแทน",
+    category: "อุตสาหกรรม",
     heroImage: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 5,
     studentCount: 360,
@@ -265,6 +344,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     color: "#7C3AED",
     courseSlugs: ["vocational-certificate", "vocational-diploma"],
     careerPaths: "งานซ่อมอิเล็กทรอนิกส์, งานระบบควบคุม, งานหุ่นยนต์",
+    category: "อุตสาหกรรม",
     heroImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 5,
     studentCount: 280,
@@ -283,6 +363,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     color: "#92400E",
     courseSlugs: ["vocational-certificate", "vocational-diploma"],
     careerPaths: "งานก่อสร้าง, งานประมาณราคา, งานควบคุมหน้างาน",
+    category: "อุตสาหกรรม",
     heroImage: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 4,
     studentCount: 230,
@@ -301,6 +382,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     color: "#0F766E",
     courseSlugs: ["vocational-certificate", "vocational-diploma"],
     careerPaths: "งานสำรวจ, งานโครงสร้าง, งานควบคุมงานโยธา",
+    category: "อุตสาหกรรม",
     heroImage: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 4,
     studentCount: 220,
@@ -319,6 +401,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     color: "#1E3A5F",
     courseSlugs: ["vocational-certificate", "vocational-diploma"],
     careerPaths: "งานเขียนแบบ, งานออกแบบอาคาร, งานนำเสนอแบบจำลอง",
+    category: "บริการ",
     heroImage: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 4,
     studentCount: 210,
@@ -337,6 +420,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     color: "#4338CA",
     courseSlugs: ["vocational-diploma", "bachelor-technology"],
     careerPaths: "งานระบบอัตโนมัติ, งาน PLC, งานหุ่นยนต์อุตสาหกรรม",
+    category: "อุตสาหกรรม",
     heroImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 5,
     studentCount: 240,
@@ -355,6 +439,7 @@ const departmentCatalog: DepartmentCatalogItem[] = [
     color: "#1D4ED8",
     courseSlugs: ["vocational-certificate", "vocational-diploma", "bachelor-technology"],
     careerPaths: "งานพัฒนาเว็บ, งานเครือข่าย, งานระบบสารสนเทศ",
+    category: "พาณิชยกรรม",
     heroImage: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1800&q=85",
     teacherCount: 4,
     studentCount: 320,
@@ -376,17 +461,174 @@ export function getCatalogDepartmentsForCourseLevel(levelSlug: string) {
   return departmentCatalog.filter((department) => department.courseSlugs.includes(levelSlug));
 }
 
+export const applicantDocuments: DepartmentDocument[] = [
+  {
+    id: "applicant-admission-rules",
+    title: "ระเบียบการรับสมัครนักศึกษา.pdf",
+    description: "รายละเอียดรอบรับสมัคร คุณสมบัติ และขั้นตอนการสมัคร",
+    category: "สมัครเรียน",
+    level: "ทั่วไป",
+    type: "PDF",
+    visibility: "main",
+  },
+  {
+    id: "applicant-course-guide",
+    title: "คู่มือหลักสูตรที่เปิดสอน.pdf",
+    description: "ภาพรวมหลักสูตรและแผนกวิชาที่เปิดรับสมัคร",
+    category: "หลักสูตร",
+    level: "ทั่วไป",
+    type: "PDF",
+    visibility: "main",
+  },
+  {
+    id: "applicant-documents",
+    title: "เอกสารประกอบการสมัคร.pdf",
+    description: "รายการเอกสารที่ผู้สมัครควรเตรียมก่อนยื่นสมัคร",
+    category: "สมัครเรียน",
+    level: "ทั่วไป",
+    type: "PDF",
+    visibility: "main",
+  },
+  {
+    id: "applicant-calendar",
+    title: "ปฏิทินการรับสมัคร.pdf",
+    description: "กำหนดการรับสมัคร รายงานตัว และประกาศผล",
+    category: "สมัครเรียน",
+    level: "ทั่วไป",
+    type: "PDF",
+    visibility: "main",
+  },
+  {
+    id: "applicant-fees",
+    title: "ค่าใช้จ่าย / ค่าธรรมเนียม.pdf",
+    description: "ข้อมูลค่าใช้จ่ายเบื้องต้นและรายการชำระเงินที่เกี่ยวข้อง",
+    category: "สมัครเรียน",
+    level: "ทั่วไป",
+    type: "PDF",
+    visibility: "main",
+  },
+];
+
 function buildProgramLevels(courseSlugs: string[]) {
   return courseLevels.filter((course) => courseSlugs.includes(course.slug)).map((course) => course.shortName);
 }
 
 function buildPrograms(department: DepartmentCatalogItem): DepartmentProgram[] {
   return courseLevels.filter((course) => department.courseSlugs.includes(course.slug)).map((course) => ({
+    slug: course.slug,
     level: course.shortName,
     name: course.title,
+    duration: course.shortName === "ปวช." ? "3 ปี" : course.shortName === "ปวส." ? "2 ปี" : "ตามโครงสร้างหลักสูตร",
     description: `${course.title} ของ${department.name} เน้นการเรียนรู้จากงานจริง การฝึกปฏิบัติ และการต่อยอดทักษะสู่สถานประกอบการ`,
+    highlights: ["ฝึกปฏิบัติในรายวิชาหลัก", "ทำโครงงานตามสาขา", "เตรียมความพร้อมก่อนฝึกงาน"],
     href: `/courses/${course.slug}`,
   }));
+}
+
+function buildDepartmentDocuments(department: DepartmentCatalogItem): DepartmentDocument[] {
+  return [
+    {
+      id: `${department.slug}-intro`,
+      title: "เอกสารแนะนำแผนก",
+      description: `ภาพรวมการเรียน จุดเด่น และช่องทางติดต่อของ${department.name}`,
+      category: "อื่น ๆ",
+      level: "ทั่วไป",
+      type: "PDF",
+      visibility: "both",
+    },
+    ...buildProgramLevels(department.courseSlugs).map((level) => ({
+      id: `${department.slug}-program-${level}`,
+      title: `หลักสูตร ${level}`,
+      description: `เอกสารหลักสูตรระดับ ${level} ของ${department.name}`,
+      category: "หลักสูตร" as const,
+      level: level as DepartmentLevel,
+      type: "PDF" as const,
+      visibility: "main" as const,
+    })),
+    {
+      id: `${department.slug}-study-plan`,
+      title: "แผนการเรียน",
+      description: "โครงสร้างรายวิชาและลำดับการเรียนในแต่ละระดับ",
+      category: "แผนการเรียน",
+      level: "ทั่วไป",
+      type: "PDF",
+      visibility: "main",
+    },
+    {
+      id: `${department.slug}-course-list`,
+      title: "รายวิชา",
+      description: "รายละเอียดรายวิชาหลักและรายวิชาชีพของแผนก",
+      category: "รายวิชา",
+      level: "ทั่วไป",
+      type: "PDF",
+      visibility: "main",
+    },
+    {
+      id: `${department.slug}-leave-form`,
+      title: "แบบฟอร์มใบลา",
+      description: "แบบฟอร์มสำหรับงานกิจกรรมและงานดูแลผู้เรียนภายในแผนก",
+      category: "แบบฟอร์ม",
+      level: "ทั่วไป",
+      type: "PDF",
+      fileUrl: "/docs/เอกสารใบลา.pdf",
+      visibility: "microsite",
+    },
+    {
+      id: `${department.slug}-activity-form`,
+      title: "แบบฟอร์มกิจกรรม",
+      description: "เอกสารภายในสำหรับการเข้าร่วมและเช็คชื่อกิจกรรมของแผนก",
+      category: "กิจกรรม",
+      level: "ทั่วไป",
+      type: "PDF",
+      visibility: "microsite",
+    },
+    {
+      id: `${department.slug}-internal-guide`,
+      title: "คู่มือระบบภายในแผนก",
+      description: "คู่มือการใช้งานระบบและช่องทางบริการภายในแผนก",
+      category: "คู่มือ",
+      level: "ทั่วไป",
+      type: "PDF",
+      visibility: "microsite",
+    },
+  ];
+}
+
+function buildCareers(department: DepartmentCatalogItem): Career[] {
+  if (department.careers?.length) return department.careers;
+  return department.careerPaths.split(",").map((career) => ({ title: career.trim() })).filter((career) => career.title);
+}
+
+function buildFacilityCards(department: DepartmentCatalogItem): Facility[] {
+  return department.facilities.map((facility) => ({
+    title: facility,
+    description: `พื้นที่สนับสนุนการฝึกทักษะและการทำโครงงานของ${department.name}`,
+  }));
+}
+
+function buildFaqs(department: DepartmentCatalogItem): FAQ[] {
+  return [
+    {
+      question: "แผนกนี้เหมาะกับใคร?",
+      answer: `เหมาะกับผู้เรียนที่สนใจ${department.description} และต้องการฝึกทักษะสายอาชีพจากงานจริง`,
+    },
+    {
+      question: "เรียนเน้นทฤษฎีหรือปฏิบัติ?",
+      answer: "การเรียนมีทั้งพื้นฐานทฤษฎีและการฝึกปฏิบัติในห้องปฏิบัติการ โครงงาน และกิจกรรมตามมาตรฐานอาชีวศึกษา",
+    },
+    {
+      question: "ต้องมีพื้นฐานมาก่อนไหม?",
+      answer: "ผู้สมัครไม่จำเป็นต้องมีพื้นฐานเฉพาะทางมาก่อน แต่อยากเรียนรู้ ลงมือทำ และฝึกทักษะอย่างต่อเนื่อง",
+    },
+    {
+      question: "สมัครเรียนต้องใช้เอกสารอะไร?",
+      answer: "ให้ตรวจสอบเอกสารล่าสุดจากหน้ารับสมัครออนไลน์ของวิทยาลัย และเตรียมเอกสารประจำตัวตามประกาศรับสมัคร",
+    },
+    {
+      question: "จบแล้วทำงานอะไรได้บ้าง?",
+      answer: `สามารถต่อยอดสู่งานที่เกี่ยวข้อง เช่น ${department.careerPaths}`,
+    },
+  ];
 }
 
 function buildFallbackDepartment(department: DepartmentCatalogItem, index: number): DepartmentDetail {
@@ -398,6 +640,9 @@ function buildFallbackDepartment(department: DepartmentCatalogItem, index: numbe
     description: department.description,
     headline: department.headline,
     websiteLabel: `เข้าสู่เว็บไซต์${department.name}`,
+    websiteUrl: `/departments/${department.slug}/site`,
+    admissionUrl: "/admissions",
+    category: department.category,
     heroImage: department.heroImage,
     icon: department.icon,
     logoPath: department.logoPath,
@@ -406,21 +651,28 @@ function buildFallbackDepartment(department: DepartmentCatalogItem, index: numbe
     careerPaths: department.careerPaths,
     teacherCount: department.teacherCount,
     studentCount: department.studentCount,
+    documents: buildDepartmentDocuments(department),
     programs: buildPrograms(department),
+    careers: buildCareers(department),
+    facilityCards: buildFacilityCards(department),
     facilities: department.facilities,
     services: department.services,
     achievements: department.achievements,
     contact: {
       phone: `054-222-222 ต่อ ${120 + index * 10}`,
-      email: `${department.slug}@lampangtc.ac.th`,
+      email: undefined,
       room: department.name,
+      location: department.name,
+      websiteUrl: `/departments/${department.slug}/site`,
     },
+    staff: [],
+    faqs: buildFaqs(department),
     teachers: [
       {
         id: `${department.slug}-teacher-1`,
         name: `ครูประจำ${department.name}`,
         subject: `รายวิชาหลักของ${department.name}`,
-        email: `${department.slug}@lampangtc.ac.th`,
+        email: "",
       },
     ],
   };
@@ -753,6 +1005,7 @@ function toDepartmentSummary(department: {
     color: department.color ?? fallback?.color ?? "#1D4ED8",
     programLevels: fallback?.programLevels ?? buildProgramLevels(catalog?.courseSlugs ?? courseLevels.map((course) => course.slug)),
     careerPaths: fallback?.careerPaths ?? catalog?.careerPaths ?? "เส้นทางอาชีพตามสาขาที่เลือกและการฝึกปฏิบัติจริง",
+    category: fallback?.category ?? catalog?.category ?? "อุตสาหกรรม",
     teacherCount: department._count.teachers || fallback?.teacherCount || 0,
     studentCount: department._count.students || fallback?.studentCount || 0,
   };
@@ -953,24 +1206,44 @@ export async function getDepartmentBySlug(slug: string): Promise<DepartmentDetai
     }
 
     const fallback = getFallbackDepartment(slug);
+    const catalog = getCatalogDepartmentBySlug(slug);
     const summary = toDepartmentSummary(department);
+    const teacherStaff = department.teachers.map((teacher) => ({
+      id: teacher.id,
+      name: teacher.name,
+      role: teacher.subject ?? "ครูผู้สอน",
+      email: teacher.email ?? undefined,
+      image: teacher.photo ?? undefined,
+    }));
+
     return {
       ...summary,
       headline: fallback?.headline ?? genericDepartmentDetails.headline,
       websiteLabel: fallback?.websiteLabel ?? genericDepartmentDetails.websiteLabel,
+      websiteUrl: fallback?.websiteUrl ?? `/departments/${summary.slug}/site`,
+      admissionUrl: fallback?.admissionUrl ?? "/admissions",
+      category: fallback?.category ?? catalog?.category ?? summary.category,
       heroImage: fallback?.heroImage ?? genericDepartmentDetails.heroImage,
       englishName: fallback?.englishName ?? summary.englishName,
       logoPath: fallback?.logoPath ?? summary.logoPath,
       programs: fallback?.programs ?? courseLevels.map((course) => ({
+        slug: course.slug,
         level: course.shortName,
         name: course.title,
+        duration: course.shortName === "ปวช." ? "3 ปี" : course.shortName === "ปวส." ? "2 ปี" : "ตามโครงสร้างหลักสูตร",
         description: `${course.title} ของ${summary.name} เน้นการเรียนรู้จากงานจริง การฝึกปฏิบัติ และการต่อยอดทักษะสู่สถานประกอบการ`,
+        highlights: ["ฝึกปฏิบัติในรายวิชาหลัก", "ทำโครงงานตามสาขา", "เตรียมความพร้อมก่อนฝึกงาน"],
         href: `/courses/${course.slug}`,
       })),
+      documents: fallback?.documents ?? (catalog ? buildDepartmentDocuments(catalog) : []),
+      careers: fallback?.careers ?? (catalog ? buildCareers(catalog) : []),
+      facilityCards: fallback?.facilityCards ?? (catalog ? buildFacilityCards(catalog) : []),
       facilities: fallback?.facilities ?? genericDepartmentDetails.facilities,
       services: fallback?.services ?? genericDepartmentDetails.services,
       achievements: fallback?.achievements ?? genericDepartmentDetails.achievements,
       contact: fallback?.contact ?? genericDepartmentDetails.contact,
+      staff: teacherStaff.length ? teacherStaff : fallback?.staff ?? [],
+      faqs: fallback?.faqs ?? (catalog ? buildFaqs(catalog) : []),
       teachers: department.teachers.length
         ? department.teachers.map((teacher) => ({
             id: teacher.id,

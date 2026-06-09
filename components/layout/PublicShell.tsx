@@ -15,9 +15,13 @@ export default function PublicShell({ children }: { children: React.ReactNode })
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Navbar />
+      <div className="print-hidden">
+        <Navbar />
+      </div>
       <main className="flex-1">{children}</main>
-      <Footer />
+      <div className="print-hidden">
+        <Footer />
+      </div>
     </div>
   );
 }
